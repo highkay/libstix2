@@ -1,4 +1,4 @@
-module github.com/freetaxii/libstix2
+module github.com/highkay/libstix2
 
 go 1.13
 
