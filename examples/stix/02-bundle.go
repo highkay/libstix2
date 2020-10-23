@@ -9,14 +9,14 @@ import (
 	"encoding/json"
 	"fmt"
 
-	"github.com/freetaxii/libstix2/objects/bundle"
-	"github.com/freetaxii/libstix2/objects/campaign"
-	"github.com/freetaxii/libstix2/objects/indicator"
-	"github.com/freetaxii/libstix2/objects/infrastructure"
-	"github.com/freetaxii/libstix2/objects/malware"
-	"github.com/freetaxii/libstix2/objects/observeddata"
-	"github.com/freetaxii/libstix2/objects/relationship"
-	"github.com/freetaxii/libstix2/objects/sighting"
+	"github.com/highkay/libstix2/objects/bundle"
+	"github.com/highkay/libstix2/objects/campaign"
+	"github.com/highkay/libstix2/objects/indicator"
+	"github.com/highkay/libstix2/objects/infrastructure"
+	"github.com/highkay/libstix2/objects/malware"
+	"github.com/highkay/libstix2/objects/observeddata"
+	"github.com/highkay/libstix2/objects/relationship"
+	"github.com/highkay/libstix2/objects/sighting"
 )
 
 func main() {

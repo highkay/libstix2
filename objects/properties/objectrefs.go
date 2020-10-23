@@ -8,7 +8,7 @@ package properties
 import (
 	"fmt"
 
-	"github.com/freetaxii/libstix2/resources"
+	"github.com/highkay/libstix2/resources"
 )
 
 // ----------------------------------------------------------------------

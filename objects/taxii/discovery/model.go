@@ -6,7 +6,7 @@
 package discovery
 
 import (
-	"github.com/freetaxii/libstix2/objects/properties"
+	"github.com/highkay/libstix2/objects/properties"
 )
 
 // ----------------------------------------------------------------------

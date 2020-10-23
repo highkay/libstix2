@@ -8,8 +8,8 @@ package objects
 import (
 	"fmt"
 
-	"github.com/freetaxii/libstix2/defs"
-	"github.com/freetaxii/libstix2/objects/properties"
+	"github.com/highkay/libstix2/defs"
+	"github.com/highkay/libstix2/objects/properties"
 )
 
 // ----------------------------------------------------------------------

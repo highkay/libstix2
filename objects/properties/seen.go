@@ -5,7 +5,7 @@
 
 package properties
 
-import "github.com/freetaxii/libstix2/timestamp"
+import "github.com/highkay/libstix2/timestamp"
 
 // ----------------------------------------------------------------------
 // Define Types

@@ -9,7 +9,7 @@ import (
 	"regexp"
 	"strings"
 
-	"github.com/freetaxii/libstix2/objects"
+	"github.com/highkay/libstix2/objects"
 )
 
 /*

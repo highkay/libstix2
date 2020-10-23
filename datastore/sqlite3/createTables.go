@@ -6,7 +6,7 @@
 package sqlite3
 
 import (
-	"github.com/freetaxii/libstix2/vocabs"
+	"github.com/highkay/libstix2/vocabs"
 )
 
 // ----------------------------------------------------------------------

@@ -5,7 +5,7 @@
 
 package discovery
 
-import "github.com/freetaxii/libstix2/resources"
+import "github.com/highkay/libstix2/resources"
 
 // ----------------------------------------------------------------------
 // Public Methods

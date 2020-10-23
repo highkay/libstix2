@@ -8,8 +8,8 @@ package indicator
 import (
 	"errors"
 
-	"github.com/freetaxii/libstix2/resources"
-	"github.com/freetaxii/libstix2/timestamp"
+	"github.com/highkay/libstix2/resources"
+	"github.com/highkay/libstix2/timestamp"
 )
 
 // ----------------------------------------------------------------------

@@ -6,8 +6,8 @@
 package location
 
 import (
-	"github.com/freetaxii/libstix2/objects"
-	"github.com/freetaxii/libstix2/objects/properties"
+	"github.com/highkay/libstix2/objects"
+	"github.com/highkay/libstix2/objects/properties"
 )
 
 // ----------------------------------------------------------------------

@@ -6,8 +6,8 @@
 package status
 
 import (
-	"github.com/freetaxii/libstix2/objects/properties"
-	"github.com/freetaxii/libstix2/timestamp"
+	"github.com/highkay/libstix2/objects/properties"
+	"github.com/highkay/libstix2/timestamp"
 )
 
 // ----------------------------------------------------------------------
