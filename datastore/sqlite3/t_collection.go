@@ -14,7 +14,7 @@ import (
 	"time"
 
 	"github.com/highkay/libstix2/defs"
-	"github.com/highkay/libstix2/resources/collections"
+	"github.com/highkay/libstix2/objects/taxii/collections"
 )
 
 // ----------------------------------------------------------------------

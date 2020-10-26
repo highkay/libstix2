@@ -8,8 +8,6 @@ package stixid
 import (
 	"regexp"
 	"strings"
-
-	"github.com/highkay/libstix2/objects"
 )
 
 /*
@@ -24,10 +22,10 @@ func ValidSTIXID(id string) bool {
 	}
 
 	// First check to see if the object type is valid, if not return false.
-	if valid := objects.ValidType(idparts[0]); valid == false {
-		// Short circuit if the STIX type part is wrong
-		return false
-	}
+	// if valid := objects.ValidType(idparts[0]); valid == false {
+	// 	// Short circuit if the STIX type part is wrong
+	// 	return false
+	// }
 
 	// If the type is valid, then check to see if the ID is a UUID, if not return
 	// false.

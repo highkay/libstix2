@@ -9,25 +9,25 @@ import (
 	"bytes"
 	"testing"
 
-	"github.com/highkay/libstix2/resources"
+	"github.com/highkay/libstix2/objects/taxii/collections"
 )
 
 // ----------------------------------------------------------------------
 //
-// func (ds *Sqlite3DatastoreType) sqlGetObjectList(query resources.CollectionQuery) (string, error)
+// func (ds *Sqlite3DatastoreType) sqlGetObjectList(query collections.CollectionQuery) (string, error)
 //
 // ----------------------------------------------------------------------
 func Test_sqlGetObjectList(t *testing.T) {
-	var query resources.CollectionQuery
+	var query collections.CollectionQuery
 	var testdata string
 
 	t.Log("Test 1: get an error for no collection id")
-	if _, err := sqlGetObjectList(query); err == nil {
+	if _, err := getObjects(query); err == nil {
 		t.Error("no error returned")
 	}
 
 	t.Log("Test 2: get correct sql statement for object list")
-	query.CollectionID = "aa"
+	query.CollectionUUID = "aa"
 	testdata = `SELECT t_collection_data.date_added, t_collection_data.stix_id, s_base_object.modified, s_base_object.spec_version FROM t_collection_data JOIN s_base_object ON t_collection_data.stix_id = s_base_object.id WHERE t_collection_data.collection_id = "aa"`
 	if v, _ := sqlGetObjectList(query); testdata != v {
 		t.Error("sql statement is not correct")
@@ -36,11 +36,11 @@ func Test_sqlGetObjectList(t *testing.T) {
 
 // ----------------------------------------------------------------------
 //
-// func (ds *Sqlite3DatastoreType) sqlGetManifestData(query resources.CollectionQuery) (string, error)
+// func (ds *Sqlite3DatastoreType) sqlGetManifestData(query collections.CollectionQuery) (string, error)
 //
 // ----------------------------------------------------------------------
 func Test_sqlGetManifestData(t *testing.T) {
-	var query resources.CollectionQuery
+	var query collections.CollectionQuery
 	var testdata string
 
 	t.Log("Test 1: get an error for no collection id")
@@ -49,7 +49,7 @@ func Test_sqlGetManifestData(t *testing.T) {
 	}
 
 	t.Log("Test 2: get correct sql statement for manifest data")
-	query.CollectionID = "aa"
+	query.CollectionUUID = "aa"
 	testdata = `SELECT t_collection_data.date_added, t_collection_data.stix_id, group_concat(s_base_object.modified), group_concat(s_base_object.spec_version) FROM t_collection_data JOIN s_base_object ON t_collection_data.stix_id = s_base_object.id WHERE t_collection_data.collection_id = "aa" GROUP BY t_collection_data.date_added`
 	if v, _ := sqlGetManifestData(query); testdata != v {
 		t.Error("sql statement is not correct")
@@ -58,12 +58,12 @@ func Test_sqlGetManifestData(t *testing.T) {
 
 // ----------------------------------------------------------------------
 //
-// func (ds *Sqlite3DatastoreType) sqlCollectionDataQueryOptions(query resources.CollectionQuery) (string, error)
+// func (ds *Sqlite3DatastoreType) sqlCollectionDataQueryOptions(query collections.CollectionQuery) (string, error)
 //
 // ----------------------------------------------------------------------
 
 func Test_sqlCollectionDataQueryOptions(t *testing.T) {
-	var q resources.CollectionQuery
+	var q collections.CollectionQuery
 
 	t.Log("Test 1: get an error for no collection id")
 	if _, err := sqlCollectionDataQueryOptions(q); err == nil {
@@ -71,7 +71,7 @@ func Test_sqlCollectionDataQueryOptions(t *testing.T) {
 	}
 
 	// Setup for remaining tests
-	q.CollectionID = "81f6f8c8-061c-4cb0-97e6-98b317ee5c93"
+	q.CollectionUUID = "81f6f8c8-061c-4cb0-97e6-98b317ee5c93"
 
 	t.Log("Test 2: get an error for invalid timestamp")
 	q.AddedAfter = nil

@@ -38,11 +38,11 @@ adds a new kill chain phase to the list. The first value is a string value
 representing the name of the kill chain being used. The second value is a string
 value representing the phase name from that kill chain.
 */
-func (o *KillChainPhasesProperty) CreateKillChainPhase(name, phase string) error {
-	k, _ := o.newKillChainPhase()
+func (o *KillChainPhasesProperty) CreateKillChainPhase(name, phase string) (*KillChainPhase, error) {
+	k, err := o.NewKillChainPhase()
 	k.SetName(name)
 	k.SetPhase(phase)
-	return nil
+	return k, err
 }
 
 // ----------------------------------------------------------------------
@@ -53,7 +53,7 @@ func (o *KillChainPhasesProperty) CreateKillChainPhase(name, phase string) error
 newKillChainPhase - This method returns a reference to a slice location. This
 will enable the code to update an object located at that slice location.
 */
-func (o *KillChainPhasesProperty) newKillChainPhase() (*KillChainPhase, error) {
+func (o *KillChainPhasesProperty) NewKillChainPhase() (*KillChainPhase, error) {
 	var s KillChainPhase
 
 	// if o.KillChainPhases == nil {

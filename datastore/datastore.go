@@ -5,7 +5,7 @@
 
 package datastore
 
-import "github.com/highkay/libstix2/resources/collections"
+import "github.com/highkay/libstix2/objects/taxii/collections"
 
 /*
 Datastorer - This interface enables access to the STIX/TAXII datastore.

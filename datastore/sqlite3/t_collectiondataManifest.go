@@ -12,8 +12,9 @@ import (
 	"strconv"
 
 	"github.com/highkay/libstix2/defs"
-	"github.com/highkay/libstix2/resources/collections"
-	"github.com/highkay/libstix2/resources/manifest"
+	"github.com/highkay/libstix2/objects"
+	"github.com/highkay/libstix2/objects/taxii/collections"
+	"github.com/highkay/libstix2/objects/taxii/manifest"
 	"github.com/highkay/libstix2/stixid"
 	"github.com/highkay/libstix2/timestamp"
 )
@@ -154,12 +155,6 @@ func (ds *Store) getManifestData(query collections.CollectionQuery) (*collection
 			specVersion = defs.MEDIA_TYPE_STIX20
 		case "2.1":
 			specVersion = defs.MEDIA_TYPE_STIX21
-		case "2.2":
-			specVersion = defs.MEDIA_TYPE_STIX22
-		case "2.3":
-			specVersion = defs.MEDIA_TYPE_STIX23
-		case "2.4":
-			specVersion = defs.MEDIA_TYPE_STIX24
 		default:
 			specVersion = defs.MEDIA_TYPE_STIX
 		}
@@ -457,7 +452,7 @@ func sqlCollectionDataWhereSTIXType(t []string, b *bytes.Buffer) error {
 	*/
 	if t != nil {
 		if len(t) == 1 {
-			if stixid.ValidSTIXObjectType(t[0]) {
+			if objects.ValidSTIXObjectType(t[0]) {
 				b.WriteString(" AND ")
 				b.WriteString(tblColData)
 				b.WriteString(`.stix_id LIKE "`)
@@ -477,7 +472,7 @@ func sqlCollectionDataWhereSTIXType(t []string, b *bytes.Buffer) error {
 					addOR = false
 				}
 				// Lets make sure the value that was passed in is actually a valid object
-				if stixid.ValidSTIXObjectType(v) {
+				if objects.ValidSTIXObjectType(v) {
 					b.WriteString(tblColData)
 					b.WriteString(`.stix_id LIKE "`)
 					b.WriteString(v)

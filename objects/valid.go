@@ -50,3 +50,53 @@ func (o *CommonObjectProperties) ValidSDO() (bool, int, []string) {
 
 	return true, 0, resultDetails
 }
+
+/*
+ValidSTIXObjectType - This function will take in a STIX Object Type and return
+true if the string represents an actual STIX object type. This is used for
+determining if input from an outside source is actually a defined STIX object or
+not.
+*/
+func ValidSTIXObjectType(t string) bool {
+	valid := false
+
+	switch t {
+	case "attack-pattern":
+		valid = true
+	case "campaign":
+		valid = true
+	case "course-of-action":
+		valid = true
+	case "identity":
+		valid = true
+	case "indicator":
+		valid = true
+	case "intrusion-set":
+		valid = true
+	case "location":
+		valid = true
+	case "malware":
+		valid = true
+	case "marking-definition":
+		valid = true
+	case "note":
+		valid = true
+	case "observed-data":
+		valid = true
+	case "opinion":
+		valid = true
+	case "relationship":
+		valid = true
+	case "report":
+		valid = true
+	case "sighting":
+		valid = true
+	case "threat-actor":
+		valid = true
+	case "tool":
+		valid = true
+	case "vulnerability":
+		valid = true
+	}
+	return valid
+}

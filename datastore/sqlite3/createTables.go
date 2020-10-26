@@ -93,12 +93,12 @@ func (ds *Store) PopulateVocabTables() {
 	ds.insertVocabData(DB_TABLE_VOCAB_IDENTITY_CLASS, vocabs.IdentityClass)
 	ds.insertVocabData(DB_TABLE_VOCAB_INDICATOR_LABEL, vocabs.IndicatorLabel)
 	ds.insertVocabData(DB_TABLE_VOCAB_INDUSTRY_SECTOR, vocabs.IndustrySector)
-	ds.insertVocabData(DB_TABLE_VOCAB_MALWARE_LABEL, vocabs.MalwareLabel)
-	ds.insertVocabData(DB_TABLE_VOCAB_REPORT_LABEL, vocabs.ReportLabel)
-	ds.insertVocabData(DB_TABLE_VOCAB_THREAT_ACTOR_LABEL, vocabs.ThreatActorLabel)
+	ds.insertVocabData(DB_TABLE_VOCAB_MALWARE_LABEL, vocabs.MalwareType)
+	ds.insertVocabData(DB_TABLE_VOCAB_REPORT_LABEL, vocabs.ReportType)
+	ds.insertVocabData(DB_TABLE_VOCAB_THREAT_ACTOR_LABEL, vocabs.ThreatActorType)
 	ds.insertVocabData(DB_TABLE_VOCAB_THREAT_ACTOR_ROLE, vocabs.ThreatActorRole)
 	ds.insertVocabData(DB_TABLE_VOCAB_THREAT_ACTOR_SOPHISTICATION, vocabs.ThreatActorSophistication)
-	ds.insertVocabData(DB_TABLE_VOCAB_TOOL_LABEL, vocabs.ToolLabel)
+	ds.insertVocabData(DB_TABLE_VOCAB_TOOL_LABEL, vocabs.ToolType)
 }
 
 // ----------------------------------------------------------------------

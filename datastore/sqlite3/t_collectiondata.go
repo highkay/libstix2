@@ -14,9 +14,10 @@ import (
 	"time"
 
 	"github.com/highkay/libstix2/defs"
-	"github.com/highkay/libstix2/resources/collections"
-	"github.com/highkay/libstix2/resources/envelope"
-	"github.com/highkay/libstix2/resources/versions"
+	"github.com/highkay/libstix2/objects"
+	"github.com/highkay/libstix2/objects/taxii/collections"
+	"github.com/highkay/libstix2/objects/taxii/envelope"
+	"github.com/highkay/libstix2/objects/taxii/versions"
 	"github.com/highkay/libstix2/stixid"
 )
 
@@ -218,7 +219,7 @@ func (ds *Store) getObjects(query collections.CollectionQuery) (*collections.Col
 
 		// Is the STIX type part of the ID valid?
 		if ds.Strict.Types == true {
-			if !stixid.ValidSTIXObjectType(idparts[0]) {
+			if !objects.ValidSTIXObjectType(idparts[0]) {
 				ds.Logger.Debugln("DEBUG: Get STIX object error, invalid STIX type", idparts[0])
 				continue
 			}

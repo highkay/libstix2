@@ -6,10 +6,10 @@
 package collections
 
 import (
-	"github.com/highkay/libstix2/objects/envelope"
-	"github.com/highkay/libstix2/objects/manifest"
 	"github.com/highkay/libstix2/objects/properties"
-	"github.com/highkay/libstix2/objects/versions"
+	"github.com/highkay/libstix2/objects/taxii/envelope"
+	"github.com/highkay/libstix2/objects/taxii/manifest"
+	"github.com/highkay/libstix2/objects/taxii/versions"
 )
 
 // ----------------------------------------------------------------------
