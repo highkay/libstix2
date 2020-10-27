@@ -48,7 +48,7 @@ decode any of the common object properties that might be found.
 func Decode(data []byte) (*CommonObjectProperties, error) {
 	var o CommonObjectProperties
 
-	err := json.Unmarshal(data, o)
+	err := json.Unmarshal(data, &o)
 	if err != nil {
 		return nil, err
 	}
