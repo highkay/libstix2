@@ -8,6 +8,7 @@ package sqlite3
 import (
 	"bytes"
 	"database/sql"
+	"encoding/json"
 	"errors"
 	"fmt"
 	"strings"
@@ -229,19 +230,23 @@ func (ds *Store) getObjects(query collections.CollectionQuery) (*collections.Col
 		// Get object by type
 		// ------------------------------------------------------------
 
-		switch idparts[0] {
-		case "indicator":
-			obj, err = ds.getIndicator(v.ID, v.Version)
-			if err != nil {
-				ds.Logger.Debugln("DEBUG: Get object error,", err)
-				continue
-			}
-		default:
-			ds.Logger.Debugln("DEBUG: Get object error, the following STIX type is not currently supported: ", idparts[0])
+		obj, err = ds.getBaseObject(v.ID, v.Version)
+		if err != nil {
+			ds.Logger.Debugln("DEBUG: Get object error,", err)
 			continue
 		}
 
-		taxiiEnvelope.AddObject(obj)
+		stixObj, _ := obj.(*objects.CommonObjectProperties)
+		stixObjMap := make(map[string]interface{})
+
+		err = json.Unmarshal(stixObj.Raw, &stixObjMap)
+
+		if err != nil {
+			ds.Logger.Debugln("DEBUG: Unmarshal object error,", err)
+			continue
+		}
+
+		taxiiEnvelope.AddObject(stixObjMap)
 	}
 
 	resultData.ObjectData = *taxiiEnvelope

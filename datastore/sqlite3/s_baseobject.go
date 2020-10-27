@@ -59,7 +59,8 @@ func baseObjectProperties() string {
  	"modified" TEXT NOT NULL,
  	"revoked" INTEGER(1,0) DEFAULT 0,
  	"confidence" INTEGER(3,0),
- 	"lang" TEXT`
+	 "lang" TEXT,
+	 "raw" BYTEA`
 	// labels
 	// external_references
 	// object_marking_refs
@@ -188,8 +189,8 @@ func (ds *Store) addBaseObject(obj *objects.CommonObjectProperties) (int, error)
 	var sqlstmt bytes.Buffer
 	sqlstmt.WriteString("INSERT INTO ")
 	sqlstmt.WriteString(tblBaseObj)
-	sqlstmt.WriteString(" (datastore_id, date_added, type, spec_version, id, created_by_ref, created, modified, revoked, confidence, lang) ")
-	sqlstmt.WriteString("values (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)")
+	sqlstmt.WriteString(" (datastore_id, date_added, type, spec_version, id, created_by_ref, created, modified, revoked, confidence, lang, raw) ")
+	sqlstmt.WriteString("values (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)")
 	stmt1 := sqlstmt.String()
 
 	// Make SQL Call
@@ -204,7 +205,8 @@ func (ds *Store) addBaseObject(obj *objects.CommonObjectProperties) (int, error)
 		obj.Modified,
 		obj.Revoked,
 		obj.Confidence,
-		obj.Lang)
+		obj.Lang,
+		obj.Raw)
 
 	if err1 != nil {
 		ds.Logger.Levelln("Function", "FUNC: addBaseObject exited with an error,", err1)
@@ -269,7 +271,7 @@ func (ds *Store) getBaseObject(stixid, version string) (*objects.CommonObjectPro
 
 	var baseObj objects.CommonObjectProperties
 	var datastoreID int
-	var dateAdded, objectType, specVersion, id, created, modified string
+	var dateAdded, objectType, specVersion, id, created, modified, raw string
 	var createdByRef, lang sql.NullString
 
 	// Since not every object will have a label, and since we are using group_concat
@@ -328,6 +330,8 @@ func (ds *Store) getBaseObject(stixid, version string) (*objects.CommonObjectPro
 	sqlstmt.WriteString(".confidence, ")
 	sqlstmt.WriteString(tblBaseObj)
 	sqlstmt.WriteString(".lang, ")
+	sqlstmt.WriteString(tblBaseObj)
+	sqlstmt.WriteString(".raw, ")
 	sqlstmt.WriteString("group_concat(")
 	sqlstmt.WriteString(tblLabels)
 	sqlstmt.WriteString(".label) ")
@@ -348,7 +352,7 @@ func (ds *Store) getBaseObject(stixid, version string) (*objects.CommonObjectPro
 	stmt := sqlstmt.String()
 
 	// Make SQL Call
-	err := ds.DB.QueryRow(stmt, stixid, version).Scan(&datastoreID, &dateAdded, &objectType, &specVersion, &id, &createdByRef, &created, &modified, &revoked, &confidence, &lang, &label)
+	err := ds.DB.QueryRow(stmt, stixid, version).Scan(&datastoreID, &dateAdded, &objectType, &specVersion, &id, &createdByRef, &created, &modified, &revoked, &confidence, &lang, &raw, &label)
 	if err != nil {
 		if err == sql.ErrNoRows {
 			ds.Logger.Levelln("Function", "FUNC: getBaseObject exited with an error,", err)

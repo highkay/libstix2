@@ -11,7 +11,7 @@ import (
 	"os"
 
 	"github.com/gologme/log"
-	"github.com/highkay/libstix2/objects/indicator"
+	"github.com/highkay/libstix2/objects"
 	"github.com/highkay/libstix2/objects/taxii/collections"
 
 	// Need to import just the symbols from the sqlite3 package
@@ -106,17 +106,12 @@ database.
 func (ds *Store) AddObject(obj interface{}) error {
 	ds.Logger.Levelln("Function", "FUNC: AddObject start")
 
-	switch o := obj.(type) {
-	case *indicator.Indicator:
-		ds.Logger.Debugln("DEBUG: Found Indicator to add to datastore")
-		err := ds.addIndicator(o)
-		if err != nil {
-			ds.Logger.Levelln("Function", "FUNC: AddObject exited with an error,", err)
-			return err
-		}
-	default:
-		ds.Logger.Levelln("Function", "FUNC: AddObject exited with an error")
-		return fmt.Errorf("add object error, the following STIX type is not currently supported: ", o)
+	stixObj, _ := obj.(*objects.CommonObjectProperties)
+
+	_, err := ds.addBaseObject(stixObj)
+	if err != nil {
+		ds.Logger.Levelln("Function", "FUNC: AddObject exited with an error,", err)
+		return err
 	}
 
 	ds.Logger.Levelln("Function", "FUNC: AddObject end")
